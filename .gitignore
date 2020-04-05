@@ -7,3 +7,5 @@ jspm_packages
 
 #secrets
 secrets.json
+
+package-lock.json

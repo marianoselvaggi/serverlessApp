@@ -17,6 +17,9 @@ provider:
     DB_PASSWORD: ${self:custom.secrets.DB_PASSWORD}
     DB_HOST: ${self:custom.secrets.DB_HOST}
     DB_PORT: ${self:custom.secrets.DB_PORT}
+    USERNAME: ${self:custom.secrets.USERNAME}
+    PASSWORD: ${self:custom.secrets.PASSWORD}
+    JWT_SECRET: ${self:custom.secrets.JWT_SECRET}
   vpc:
     securityGroupIds:
       - ${self:custom.secrets.SECURITY_GROUP_ID}
@@ -27,48 +30,62 @@ provider:
       - ${self:custom.secrets.SUBNET4_ID}
 
 functions:
+  authorize:
+    handler: functions/authorize.handler
   healthCheck:
-    handler: handler.healthCheck
+    handler: functions/healthCheck.handler
     events:
       - http:
           path: /
           method: get
           cors: true
+  login:
+    handler: functions/login.handler
+    events:
+      - http:
+          path: /auth/login
+          method: post
+          cors: true
   create:
-    handler: handler.create
+    handler: functions/create.handler
     events:
       - http:
           path: notes
           method: post
           cors: true
+          authorizer: authorize
   getOne:
-    handler: handler.getOne
+    handler: functions/getOne.handler
     events:
       - http:
           path: notes/{id}
           method: get
           cors: true
+          authorizer: authorize
   getAll:
-    handler: handler.getAll
+    handler: functions/getAll.handler
     events:
      - http:
          path: notes
          method: get
          cors: true
+         authorizer: authorize
   update:
-    handler: handler.update
+    handler: functions/update.handler
     events:
      - http:
          path: notes/{id}
          method: put
          cors: true
+         authorizer: authorize
   destroy:
-    handler: handler.destroy
+    handler: functions/destroy.handler
     events:
      - http:
          path: notes/{id}
          method: delete
          cors: true
+         authorizer: authorize
 
 plugins:
   - serverless-offline

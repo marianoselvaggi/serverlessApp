@@ -5,14 +5,18 @@
   "main": "handler.js",
   "scripts": {
     "dev": "sls offline start --skipCacheInvalidation",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Mariano Selvaggi",
   "license": "ISC",
   "devDependencies": {
+    "jest": "^25.2.7",
     "serverless-offline": "^6.1.4"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
     "mysql2": "^2.1.0",
     "sequelize": "^5.21.5"
   }
