@@ -2,7 +2,6 @@
   "name": "web-api",
   "version": "1.0.0",
   "description": "",
-  "main": "handler.js",
   "scripts": {
     "dev": "sls offline start --skipCacheInvalidation",
     "test": "jest"

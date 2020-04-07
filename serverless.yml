@@ -31,23 +31,23 @@ provider:
 
 functions:
   authorize:
-    handler: functions/authorize.handler
+    handler: src/authorize.handler
   healthCheck:
-    handler: functions/healthCheck.handler
+    handler: src/healthcheck.handler
     events:
       - http:
           path: /
           method: get
           cors: true
   login:
-    handler: functions/login.handler
+    handler: src/login.handler
     events:
       - http:
           path: /auth/login
           method: post
           cors: true
   create:
-    handler: functions/create.handler
+    handler: src/create.handler
     events:
       - http:
           path: notes
@@ -55,7 +55,7 @@ functions:
           cors: true
           authorizer: authorize
   getOne:
-    handler: functions/getOne.handler
+    handler: src/getOne.handler
     events:
       - http:
           path: notes/{id}
@@ -63,7 +63,7 @@ functions:
           cors: true
           authorizer: authorize
   getAll:
-    handler: functions/getAll.handler
+    handler: src/getAll.handler
     events:
      - http:
          path: notes
@@ -71,7 +71,7 @@ functions:
          cors: true
          authorizer: authorize
   update:
-    handler: functions/update.handler
+    handler: src/update.handler
     events:
      - http:
          path: notes/{id}
@@ -79,7 +79,7 @@ functions:
          cors: true
          authorizer: authorize
   destroy:
-    handler: functions/destroy.handler
+    handler: src/destroy.handler
     events:
      - http:
          path: notes/{id}
